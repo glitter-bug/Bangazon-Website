@@ -16,7 +16,7 @@ It shows how to remove a model's property from the automatic model binding in a 
 1. The chosen person will clone the team's repository to their machine. **No one else should**.
 1. Create a branch named `initial-setup`.
 1. Open Visual Studio and load the solution file.
-1. Create a copy of of `appsettings.json.example` and name the file `appsettings.json` Make sure the connection string is correct.
+1. Create a copy of `appsettings.json.example` and name the file `appsettings.json` Make sure the connection string is correct.
 1. Move on to the **Seeding the Database** section.
 
 ### Seeding the Database
@@ -55,7 +55,7 @@ Push up your branch and submit a PR that your team lead will review and approve.
 Once the initial setup is complete by the volunteer and the PR is approved by your team lead, the PR will get merged into master and now everyone else can pull the repository.
 
 1. Open Visual Studio and load the solution file
-1. Create a copy of of `appsettings.json.example` and name the file `appsettings.json` Make sure the connection string is correct.
+1. Create a copy of `appsettings.json.example` and name the file `appsettings.json` Make sure the connection string is correct.
 1. Go to the Package Manager Console in Visual Studio.
 1. Execute `Update-Database` to generate your tables.
 1. Use the SQL Server Object Explorer to verify that everything worked as expected.
