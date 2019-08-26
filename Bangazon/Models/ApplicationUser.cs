@@ -7,10 +7,7 @@ namespace Bangazon.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public ApplicationUser()
-        {
-             
-        }
+        public ApplicationUser() { }
 
         [Required]
         [Display(Name ="First Name")]
