@@ -13,7 +13,7 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -42,11 +42,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Profile</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Shopping Cart</a>
                         </li>
+                        @* Adds search bar to nav bar *@
+                        @using (Html.BeginForm())
+                        {
+                            <li>
+                                Find Product by name: @Html.TextBox("SearchString")
+                                <input type="hidden" value="Search" />
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="btn btn-dark" asp-area="" asp-controller="Products" asp-action="Create">Sell Product</a>
                             
