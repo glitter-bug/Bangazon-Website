@@ -15,21 +15,50 @@
             <th>
                 @Html.DisplayNameFor(model => model.Label)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Label)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProductTypeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProductTypeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProductTypeId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Label)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductTypeId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProductTypeId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProductTypeId">Delete</a>
+                </td>
+            </tr>
+            var products = item.Products.ToList();
+            <tr>
+                <td>
+            <table class="table">
+                <tbody>
+                    @for (int i = 0; i < 3; i++)
+                    {
+                        if(products.Count > i)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => products[i].Title)
+                            </td>
+                        </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+                </td>
+            </tr>
+
+        }
     </tbody>
 </table>
