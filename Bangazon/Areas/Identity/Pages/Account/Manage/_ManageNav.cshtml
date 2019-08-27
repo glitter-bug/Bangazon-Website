@@ -9,6 +9,6 @@
     {
         <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
     }
-    <li class="nav-item"><a asp-controller="PaymentTypes" asp-action="Index">Payment Type</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PaymentTypeNavClass(ViewContext)" id="payment-type" asp-page="./PaymentType" >Payment Type</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
 </ul>
