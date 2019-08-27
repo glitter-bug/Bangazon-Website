@@ -7,16 +7,40 @@
 <h1>Details</h1>
 
 <div>
-    <h4>ProductType</h4>
+    <h4>@Html.DisplayFor(model => model.Label)</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Label)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Label)
-        </dd>
-    </dl>
+    <h4>Products</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ProductTypeId">Edit</a> |
