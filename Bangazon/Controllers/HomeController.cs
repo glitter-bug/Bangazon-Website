@@ -24,10 +24,12 @@ namespace Bangazon.Controllers
         public async Task<IActionResult> Index()
         {
             List<Product> products = await _context.Product
-                                        
+                                        .Include(p => p.ProductType)
+                                        .OrderBy(p => p.DateCreated)
+                                        .Take(20)
                                         .ToListAsync();
                                          
-            return View();
+            return View(products);
         }
 
         public IActionResult Privacy()
