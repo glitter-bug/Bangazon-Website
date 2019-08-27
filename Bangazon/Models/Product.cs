@@ -25,6 +25,7 @@ namespace Bangazon.Models
         public string Title { get; set; }
 
         [Required]
+        [Display(Name ="Price per Unit")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public double Price { get; set; }
 
