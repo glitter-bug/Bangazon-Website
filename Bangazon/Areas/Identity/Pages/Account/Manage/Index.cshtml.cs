@@ -73,6 +73,7 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            
             //var firstName = await _userManager.GetFirstNameAsync(user);
 
 
@@ -81,7 +82,10 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 Email = email,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.StreetAddress
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
