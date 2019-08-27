@@ -26,6 +26,7 @@ namespace Bangazon.Controllers
         // GET: Products
         public async Task<IActionResult> Index(string searchString)
         {
+            // Grabs products from contexts, if search string exists products are filtered by search
             var products = from p in _context.Product
                             select p;
             if (!String.IsNullOrEmpty(searchString))
@@ -35,8 +36,6 @@ namespace Bangazon.Controllers
             var applicationDbContext = products;
             return View(await applicationDbContext.ToListAsync());
         }
-//----------------------------------------------------------------------------------------------------------------
-
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
