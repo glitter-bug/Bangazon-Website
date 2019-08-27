@@ -36,17 +36,19 @@ namespace Bangazon.Models
 
         public string City {get; set;}
 
+        [Display(Name = "Image")]
         public string ImagePath {get; set;}
 
         public bool Active { get; set; }
 
-        
+        [Display(Name = "Seller")]
         public ApplicationUser User { get; set; }
 
         [Required]
         [Display(Name="Product Category")]
         public int ProductTypeId { get; set; }
 
+        [Display(Name = "Product Category")]
         public ProductType ProductType { get; set; }
 
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
