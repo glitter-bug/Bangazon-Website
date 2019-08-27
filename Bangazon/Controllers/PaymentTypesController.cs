@@ -27,7 +27,9 @@ namespace Bangazon.Controllers
         // GET: PaymentTypes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PaymentType.Include(p => p.User);
+            var applicationDbContext = _context.PaymentType
+                //.Where(p => p.UserId == user.Id)
+                .Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -62,18 +64,21 @@ namespace Bangazon.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentTypeId,DateCreated,Description,AccountNumber,UserId")] PaymentType paymentType)
+        public async Task<IActionResult> Create([Bind("Description,AccountNumber")] PaymentType paymentType)
         {
+            ModelState.Remove("UserId");
+            ModelState.Remove("User");
             if (ModelState.IsValid)
             {
+                var user = await GetUserAsync();
+                paymentType.UserId = user.Id;
                 _context.Add(paymentType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", paymentType.UserId);
+
             return View(paymentType);
         }
-
         // GET: PaymentTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
