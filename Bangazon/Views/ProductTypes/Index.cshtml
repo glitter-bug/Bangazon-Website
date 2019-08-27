@@ -47,10 +47,12 @@
                         if(products.Count > i)
                         {
                         <tr>
+                            <td>
                             <a asp-controller="Products" asp-action="Details" asp-route-id="@products[i].ProductId">
                                 @Html.DisplayFor(modelItem => products[i].Title)
                                 <br />
                             </a>
+                            </td>
                         </tr>
                         }
                     }
