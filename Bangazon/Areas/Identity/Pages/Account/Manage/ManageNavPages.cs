@@ -15,6 +15,7 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
         public static string OrderHistory => "OrderHistory";
+        public static string OrderDetails => "OrderDetails";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
@@ -26,6 +27,7 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
         public static string OrderHistoryNavClass(ViewContext viewContext) => PageNavClass(viewContext, OrderHistory);
+        public static string OrderDetailsNavClass(ViewContext viewContext) => PageNavClass(viewContext, OrderDetails);
         private static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string
