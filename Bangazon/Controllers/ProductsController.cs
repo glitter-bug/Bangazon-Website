@@ -54,6 +54,7 @@ namespace Bangazon.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
@@ -66,8 +67,11 @@ namespace Bangazon.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,UserId,City,ImagePath,Active,ProductTypeId")] Product product)
         {
+            
             if (ModelState.IsValid)
             {
+
+                
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
