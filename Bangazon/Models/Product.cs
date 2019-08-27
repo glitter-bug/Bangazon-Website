@@ -16,7 +16,7 @@ namespace Bangazon.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated {get;set;}
 
-        [RegularExpression(@"^[^<>.,?;:'()!~%\-_@#/*""]+$")]
+        [RegularExpression("^[a-zA-Z0-9 ]*$")]
         [Required]
         [StringLength(255)]
         public string Description { get; set; }
