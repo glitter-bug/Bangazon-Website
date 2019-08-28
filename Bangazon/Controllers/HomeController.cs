@@ -25,7 +25,7 @@ namespace Bangazon.Controllers
         {
             List<Product> products = await _context.Product
                                         .Include(p => p.ProductType)
-                                        .OrderBy(p => p.DateCreated)
+                                        .OrderByDescending(p => p.DateCreated)
                                         .Take(20)
                                         .ToListAsync();
                                          
