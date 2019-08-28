@@ -27,8 +27,9 @@ namespace Bangazon.Controllers
         // GET: PaymentTypes
         public async Task<IActionResult> Index()
         {
+            var user = await GetUserAsync();
             var applicationDbContext = _context.PaymentType
-                //.Where(p => p.UserId == user.Id)
+                .Where(p => p.UserId == user.Id)
                 .Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
         }
