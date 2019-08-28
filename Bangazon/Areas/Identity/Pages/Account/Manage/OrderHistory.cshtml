@@ -38,7 +38,7 @@
                     @Html.DisplayFor(modelItem => item.PaymentType.AccountNumber)
                 </td>
                 <td>
-                    <a class="nav-link @ManageNavPages.OrderDetailsNavClass(ViewContext)" id="order-details" asp-page="./OrderDetails">Details</a>
+                    <a class="nav-link @ManageNavPages.OrderDetailsNavClass(ViewContext)" id="order-details" asp-page="./OrderDetails" asp-route-id="@item.OrderId">Details</a>
                 </td>
             </tr>
         }
