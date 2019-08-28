@@ -23,15 +23,19 @@ namespace Bangazon.Controllers
             _userManager = userManager;
         }
 
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         // GET: Products
         public async Task<IActionResult> Index(string searchString)
         {
             // Grabs products from contexts, if search string exists products are filtered by search
             var products = from p in _context.Product
+                           .Include(p => p.ProductType)
+                           .Include(p => p.User)
                             select p;
             if (!String.IsNullOrEmpty(searchString))
             {
-                products = products.Where(p => p.Title.Contains(searchString));
+                products = products.Where(p => p.Title.Contains(searchString) || p.City.Contains(searchString));
             }
             var applicationDbContext = products;
             return View(await applicationDbContext.ToListAsync());
@@ -60,8 +64,7 @@ namespace Bangazon.Controllers
         [Authorize]
         // GET: Products/Create
         public IActionResult Create()
-        {
-            
+        {         
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
@@ -72,13 +75,13 @@ namespace Bangazon.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,UserId,City,ImagePath,Active,ProductTypeId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,City,ImagePath,Active,ProductTypeId")] Product product)
         {
-            
+            ApplicationUser user = await GetCurrentUserAsync();
+            product.UserId = user.Id;
+            ModelState.Remove("UserId");
             if (ModelState.IsValid)
-            {
-
-                
+            {               
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
