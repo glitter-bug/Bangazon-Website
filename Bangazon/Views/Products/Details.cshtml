@@ -12,12 +12,14 @@
     <div>
         @if (Model.ImagePath != null)
         {
-            <dt class="col-lg-2">
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </dt>
-            <dd>
-                <img width="300" height="300" src="@Url.Content(Model.ImagePath)">
-            </dd>
+            <dl>
+                <dt class="col-lg-2">
+                    @Html.DisplayNameFor(model => model.ImagePath)
+                </dt>
+                <dd>
+                    <img width="300" height="300" src="@Url.Content(Model.ImagePath)">
+                </dd>
+            </dl>
         }
     </div>
     <dl class="row">
