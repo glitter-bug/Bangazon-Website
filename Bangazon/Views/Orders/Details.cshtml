@@ -35,20 +35,19 @@
             @Html.DisplayFor(model => model.PaymentType.AccountNumber)
         </dr>
 
-
-
     </dr>
 </div>
+<p>ORDERS</p>
 @foreach (var item in Model.OrderProducts)
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.Description)
-        </td>
-    </tr>
+<dr class="col-sm-2">
+    <dr>
+        @Html.DisplayFor(modelItem => item.Product.Title)
+    </dr>
+    <dr>
+        @Html.DisplayFor(modelItem => item.Product.Description)
+    </dr>
+</dr>
 }
 
 <div>
