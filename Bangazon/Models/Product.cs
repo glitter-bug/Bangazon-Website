@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Bangazon.Models
 {
     public class Product
@@ -37,6 +38,9 @@ namespace Bangazon.Models
 
         [Required]
         public string UserId {get; set;}
+
+        [Display(Name = "Local Delivery")]
+        public bool LocalDelivery { get; set; }
 
         [RegularExpression("^[a-zA-Z0-9 ]*$")]
         public string City {get; set;}
