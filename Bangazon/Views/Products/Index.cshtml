@@ -66,12 +66,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.City)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ImagePath)
+            </td>*@
+            <td>
+            <img width="75" height="75" src="@Url.Content(item.ImagePath)" />
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>*@
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.User.FullName)
             </td>
