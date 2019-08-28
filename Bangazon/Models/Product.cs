@@ -16,10 +16,12 @@ namespace Bangazon.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated {get;set;}
 
+        [RegularExpression("^[a-zA-Z0-9 ]*$")]
         [Required]
         [StringLength(255)]
         public string Description { get; set; }
 
+        [RegularExpression("^[a-zA-Z0-9 ]*$")]
         [Required]
         [StringLength(55, ErrorMessage="Please shorten the product title to 55 characters")]
         public string Title { get; set; }
@@ -35,6 +37,7 @@ namespace Bangazon.Models
         [Required]
         public string UserId {get; set;}
 
+        [RegularExpression("^[a-zA-Z0-9 ]*$")]
         public string City {get; set;}
 
         [Display(Name = "Image")]
