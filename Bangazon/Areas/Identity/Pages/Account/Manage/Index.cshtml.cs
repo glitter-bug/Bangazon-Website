@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Bangazon.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bangazon.Areas.Identity.Pages.Account.Manage
 {
@@ -17,15 +19,18 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _context = context;
         }
 
         public string Username { get; set; }
@@ -73,10 +78,8 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            
+
             //var firstName = await _userManager.GetFirstNameAsync(user);
-
-
             Username = userName;
 
             Input = new InputModel
@@ -89,7 +92,6 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
             };
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
-
             return Page();
         }
 
@@ -128,6 +130,23 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    user.FirstName = Input.FirstName;
+                    user.LastName = Input.LastName;
+                    user.StreetAddress = Input.Address;
+                    _context.Update(user);
+                    await _context.SaveChangesAsync();
+                }
+                catch
+                {
+                    var userId = await _userManager.GetUserIdAsync(user);
+                    throw new InvalidOperationException($"Unexpected error occurred setting details for user with ID '{userId}'.");
+                }
+            }
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
@@ -145,7 +164,6 @@ namespace Bangazon.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
 
             var userId = await _userManager.GetUserIdAsync(user);
             var email = await _userManager.GetEmailAsync(user);

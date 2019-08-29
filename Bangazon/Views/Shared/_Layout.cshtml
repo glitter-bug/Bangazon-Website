@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Bangazon.Models;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -35,6 +41,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                         </li>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="MyProducts">My Products</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ProductTypes" asp-action="Index">Product Types</a>
                         </li>
@@ -55,7 +68,7 @@
                         }
                         <li class="nav-item">
                             <a class="btn btn-dark" asp-area="" asp-controller="Products" asp-action="Create">Sell Product</a>
-                            
+
                         </li>
                     </ul>
                 </div>

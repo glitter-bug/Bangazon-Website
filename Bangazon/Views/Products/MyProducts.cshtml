@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Bangazon.Models.ProductViewModels.MyProductsViewModel>
+
+@{
+    ViewData["Title"] = "MyProducts";
+}
+
+<h1>MyProductsView</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberSold)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.LocalDelivery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberSold)
+            </td>
+            @if (item.Product.LocalDelivery)
+            {
+                <td>
+                    Yes
+                </td>
+            }
+            else
+            {
+                <td>
+                    No
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.City)
+            </td>
+            <td>
+                <img width="75" height="75" src="@Url.Content(item.Product.ImagePath)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductType.Label)
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
