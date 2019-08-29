@@ -46,20 +46,24 @@ namespace Bangazon.Controllers
 
         // GET: UserProducts
         public async Task<IActionResult> MyProducts()
-        { 
+        {
 
             var products = await _context.Product
                 .Where(p => p.UserId == _userManager.GetUserId(User))
                 .Include(p => p.OrderProducts)
-                .Select(product => new MyProductsViewModel()
-                    {
-                        Product = product,
-                        NumberSold = product.OrderProducts.Count(op => op.Order.DateCompleted != null)
-                    }
-                )
+                    .ThenInclude(op => op.Order)
+                .Include(p => p.ProductReviews)
                 .ToListAsync();
 
-            return View(products);
+            var myProducts = products.Select(product => new MyProductsViewModel()
+            {
+                Product = product,
+                NumberSold = product.OrderProducts.Count(op => op.Order.DateCompleted != null),
+                Rating = product.ProductReviews.Count > 0 ? product.ProductReviews.Average(pr => pr.Review) : 0
+            }).ToList();
+             
+
+            return View(myProducts);
         }
 
         // GET: Products/Details/5

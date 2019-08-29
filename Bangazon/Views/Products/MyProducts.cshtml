@@ -42,6 +42,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Product.ProductType)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -88,7 +91,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Product.ProductType.Label)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
         </tr>
         }
     </tbody>

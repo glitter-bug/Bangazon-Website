@@ -11,6 +11,7 @@ namespace Bangazon.Models.ProductViewModels
 
         public int NumberSold { get; set; }
 
+        public double Rating { get; set; }
 
     }
 }
