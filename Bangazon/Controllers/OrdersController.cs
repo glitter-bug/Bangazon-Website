@@ -164,7 +164,7 @@ namespace Bangazon.Controllers
         {
             var order = await _context.Order.FindAsync(id);
             var orderProduct =  _context.OrderProduct.Where(
-                 op => op.OrderId == op.OrderId);
+                 op => op.OrderId == id);
             _context.OrderProduct.RemoveRange(orderProduct);
             _context.Order.Remove(order);
             await _context.SaveChangesAsync();
