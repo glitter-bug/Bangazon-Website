@@ -43,7 +43,7 @@ namespace Bangazon.Controllers
                 .Include(o => o.User)
                 .Include(o => o.OrderProducts)
                 .ThenInclude(op => op.Product)
-            
+
 
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
@@ -147,6 +147,7 @@ namespace Bangazon.Controllers
             var order = await _context.Order
                 .Include(o => o.PaymentType)
                 .Include(o => o.User)
+                .Include(o => o.OrderProducts)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
@@ -162,6 +163,9 @@ namespace Bangazon.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var order = await _context.Order.FindAsync(id);
+            var orderProduct =  _context.OrderProduct.Where(
+                 op => op.OrderId == op.OrderId);
+            _context.OrderProduct.RemoveRange(orderProduct);
             _context.Order.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
