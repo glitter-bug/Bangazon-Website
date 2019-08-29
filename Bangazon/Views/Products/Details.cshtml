@@ -23,15 +23,6 @@
         }
     </div>
     <dl class="row">
-        @*@if (Model.ImagePath != null)
-        {
-            <dt class="col-lg-2">
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </dt>
-            <dd>
-                <img width="200" height="200" src="@Url.Content(Model.ImagePath)">
-            </dd>
-        }*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -44,12 +35,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
         </dt>
@@ -60,7 +45,7 @@
             @Html.DisplayNameFor(model => model.Quantity)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
+            @Html.DisplayFor(model => model.Quantity) <span class="invisible">|||||||||||||||||||</span> <a asp-action="Edit">Restock</a>
         </dd>
         @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.City)
