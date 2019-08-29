@@ -9,6 +9,7 @@ using Bangazon.Data;
 using Bangazon.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Bangazon.Models.ProductViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 
@@ -41,6 +42,24 @@ namespace Bangazon.Controllers
             }
             var applicationDbContext = products;
             return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: UserProducts
+        public async Task<IActionResult> MyProducts()
+        { 
+
+            var products = await _context.Product
+                .Where(p => p.UserId == _userManager.GetUserId(User))
+                .Include(p => p.OrderProducts)
+                .Select(product => new MyProductsViewModel()
+                    {
+                        Product = product,
+                        NumberSold = product.OrderProducts.Count(op => op.Order.DateCompleted != null)
+                    }
+                )
+                .ToListAsync();
+
+            return View(products);
         }
 
         // GET: Products/Details/5
