@@ -8,9 +8,6 @@ namespace Bangazon.Models.ProductViewModels
     public class MyProductsViewModel
     {
         public Product Product { get; set; }
-
         public int NumberSold { get; set; }
-
-
     }
 }
