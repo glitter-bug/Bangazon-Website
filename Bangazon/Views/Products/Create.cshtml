@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -33,9 +33,9 @@
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             @*<div class="form-group" hidden>
-            <label asp-for="UserId" class="control-label"></label>
-            <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div>*@
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+                </div>*@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="LocalDelivery" /> @Html.DisplayNameFor(model => model.LocalDelivery)
@@ -46,10 +46,16 @@
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <input asp-for="ImagePath" class="form-control" multiple>
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
-                <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" type="file" name="file" multiple>
-                <span asp-validation-for="ImagePath" class="text-danger"></span>
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="file"/>
+                </div>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
