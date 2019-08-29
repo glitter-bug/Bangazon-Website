@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Order Details</h1>
 
 <div>
-    <h4>Order</h4>
+
     <hr />
     <dr class="row">
         <dr class="col-sm-2">
@@ -37,20 +37,19 @@
 
     </dr>
 </div>
-<p>ORDERS</p>
-@foreach (var item in Model.OrderProducts)
-{
-<dr class="col-sm-2">
-    <dr>
-        @Html.DisplayFor(modelItem => item.Product.Title)
-    </dr>
-    <dr>
-        @Html.DisplayFor(modelItem => item.Product.Description)
-    </dr>
-</dr>
-}
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.OrderId">Edit</a> |
+<h5>Purchase Product</h5>
+<table>
+    <tbody>
+        @foreach (var item in Model.OrderProducts)
+        {
+            <dr class="row">
+                <dr class="col-sm-10">
+                    @Html.DisplayFor(modelItem => item.Product.Title)
+                </dr>
+                <a asp-action="Delete" asp-controller="OrderProducts" asp-route-id="@item.ProductId">Delete</a>
+            </dr>
+        }
+    </tbody>
     <a asp-action="Index">Back to List</a>
-</div>
+</table>
+
