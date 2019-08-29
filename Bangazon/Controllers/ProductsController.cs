@@ -9,6 +9,8 @@ using Bangazon.Data;
 using Bangazon.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Bangazon.Controllers
 {
@@ -32,7 +34,7 @@ namespace Bangazon.Controllers
             var products = from p in _context.Product
                            .Include(p => p.ProductType)
                            .Include(p => p.User)
-                            select p;
+                           select p;
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(p => p.Title.Contains(searchString) || p.City.Contains(searchString));
@@ -64,7 +66,7 @@ namespace Bangazon.Controllers
         [Authorize]
         // GET: Products/Create
         public IActionResult Create()
-        {         
+        {
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
@@ -75,13 +77,23 @@ namespace Bangazon.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,LocalDelivery,City,ImagePath,Active,ProductTypeId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,LocalDelivery,City,ImagePath,Active,ProductTypeId")] Product product, IFormFile file)
         {
+            var path = Path.Combine(
+                  Directory.GetCurrentDirectory(), "wwwroot",
+                  "Images", file.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
             ApplicationUser user = await GetCurrentUserAsync();
             product.UserId = user.Id;
+            product.ImagePath = "Images/" + file.FileName;
             ModelState.Remove("UserId");
             if (ModelState.IsValid)
-            {               
+            {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
