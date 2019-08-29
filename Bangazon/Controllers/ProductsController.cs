@@ -33,7 +33,7 @@ namespace Bangazon.Controllers
             var products = from p in _context.Product
                            .Include(p => p.ProductType)
                            .Include(p => p.User)
-                            select p;
+                           select p;
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products.Where(p => p.Title.Contains(searchString) || p.City.Contains(searchString));
@@ -51,18 +51,19 @@ namespace Bangazon.Controllers
                 .Where(p => p.UserId == _userManager.GetUserId(User))
                 .ToListAsync();
 
-           foreach(var item in products)
+            foreach (var item in products)
             {
                 var UserProduct = new MyProductsViewModel();
                 UserProduct.Product = item;
-                var count = _context.Order
+                var count = await _context.Order
                         .Where(o => o.DateCompleted != null)
                         .Include(o => o.OrderProducts)
-                        .ThenInclude(op => op.Product)
-                        .Count(p => p.UserId == _userManager.GetUserId(User));
+                        .Where(o => o.OrderProducts
+                             .Any(op => op.Product.UserId == _userManager.GetUserId(User)))
+                        .CountAsync();
                 UserProduct.NumberSold = count;
+                UserProducts.Add(UserProduct);
             }
-
 
             return View(UserProducts);
         }
@@ -90,7 +91,7 @@ namespace Bangazon.Controllers
         [Authorize]
         // GET: Products/Create
         public IActionResult Create()
-        {         
+        {
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
@@ -107,7 +108,7 @@ namespace Bangazon.Controllers
             product.UserId = user.Id;
             ModelState.Remove("UserId");
             if (ModelState.IsValid)
-            {               
+            {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
