@@ -8,6 +8,19 @@
 
 <h4>Product</h4>
 <hr />
+<div>
+    @if (Model.ImagePath != null)
+    {
+        <dl>
+            <dt class="col-lg-2">
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
+            <dd>
+                <img width="200" height="200" src="~/@Html.DisplayFor(model => model.ImagePath)">
+            </dd>
+        </dl>
+    }
+</div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -18,11 +31,7 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" />
-                <span asp-validation-for="DateCreated" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -38,10 +47,8 @@
                 <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
+            <div class="form-group">             
+                <input type="hidden" asp-for="UserId" class="form-control" asp-items="ViewBag.UserId" disable/>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -54,9 +61,7 @@
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
-                <span asp-validation-for="ImagePath" class="text-danger"></span>
+                <input type="hidden" asp-for="ImagePath" class="form-control" />
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

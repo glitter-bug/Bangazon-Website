@@ -4,7 +4,7 @@
     ViewData["Title"] = "MyProducts";
 }
 
-<h1>MyProductsView</h1>
+<h1>My Products</h1>
 
 <table class="table">
     <thead>
@@ -34,13 +34,7 @@
                 @Html.DisplayNameFor(model => model.Product.City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product.ImagePath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product.User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product.ProductType)
+                @Html.DisplayNameFor(model => model.Rating)
             </th>
             <th></th>
         </tr>
@@ -83,12 +77,8 @@
                 @Html.DisplayFor(modelItem => item.Product.City)
             </td>
             <td>
-                <img width="75" height="75" src="@Url.Content(item.Product.ImagePath)" />
+                @Html.DisplayFor(modelItem => item.Rating)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductType.Label)
-            </td>
-
         </tr>
         }
     </tbody>
