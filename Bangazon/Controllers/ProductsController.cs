@@ -44,6 +44,21 @@ namespace Bangazon.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Search(string searchString)
+        {
+            // Grabs products from contexts, if search string exists products are filtered by search
+            var products = from p in _context.Product
+                           .Include(p => p.ProductType)
+                           .Include(p => p.User)
+                           select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => p.Title.Contains(searchString) || p.City.Contains(searchString));
+            }
+            var applicationDbContext = products;
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: UserProducts
         public async Task<IActionResult> MyProducts()
         { 

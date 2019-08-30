@@ -59,16 +59,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Shopping Cart</a>
                         </li>
                         @* Adds search bar to nav bar *@
-                        @using (Html.BeginForm())
-                        {
-                            <li>
+                        <li>
+                            <form asp-controller="Products" asp-action="Index">
                                 Find Product by name: @Html.TextBox("SearchString")
-                                <input type="hidden" value="Search" />
-                            </li>
-                        }
+                            </form>
+                        </li>
                         <li class="nav-item">
                             <a class="btn btn-dark" asp-area="" asp-controller="Products" asp-action="Create">Sell Product</a>
-
                         </li>
                     </ul>
                 </div>
