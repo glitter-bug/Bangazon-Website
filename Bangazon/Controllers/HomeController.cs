@@ -21,14 +21,14 @@ namespace Bangazon.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             List<Product> products = await _context.Product
                                         .Include(p => p.ProductType)
                                         .OrderByDescending(p => p.DateCreated)
                                         .Take(20)
                                         .ToListAsync();
-                                         
+
             return View(products);
         }
 
