@@ -14,6 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190829190526_ProductReview.cs" />
+    <Compile Remove="Migrations\20190829190526_ProductReview.Designer.cs" />
+    <Compile Remove="Migrations\20190829193012_ProductReview.cs" />
+    <Compile Remove="Migrations\20190829193012_ProductReview.Designer.cs" />
+    <Compile Remove="Migrations\20190829193438_ProductReview.cs" />
+    <Compile Remove="Migrations\20190829193438_ProductReview.Designer.cs" />
+    <Compile Remove="Migrations\20190829193856_ProductReview.cs" />
+    <Compile Remove="Migrations\20190829193856_ProductReview.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="appsettings.json" />
   </ItemGroup>
 
