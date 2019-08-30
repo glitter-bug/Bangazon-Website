@@ -155,7 +155,7 @@ namespace Bangazon.Controllers
             var orderProduct = await _context.OrderProduct.FindAsync(id);
             _context.OrderProduct.Remove(orderProduct);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Orders");
+            return RedirectToAction("Details", "Orders", new { id = orderProduct.OrderId });
         }
 
         private bool OrderProductExists(int id)
