@@ -17,6 +17,11 @@ namespace Bangazon.Models
     public DateTime DateCreated { get; set; }
 
     [Required]
+    [DataType(DataType.Date)]
+    [CurrentDate(ErrorMessage = "Date must be after or equal to current date")]
+    public DateTime ExpirationDate { get; set; }
+
+    [Required]
     [StringLength(55)]
     public string Description { get; set; }
 
@@ -32,4 +37,22 @@ namespace Bangazon.Models
 
     public ICollection<Order> Orders { get; set; }
   }
+
+
+    public class CurrentDateAttribute : ValidationAttribute
+    {
+        public CurrentDateAttribute()
+        {
+        }
+
+        public override bool IsValid(object value)
+        {
+            var dt = (DateTime)value;
+            if (dt >= DateTime.Now)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
 }
