@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 
 namespace Bangazon.Models
@@ -46,6 +47,7 @@ namespace Bangazon.Models
         public string City {get; set;}
 
         [Display(Name = "Image")]
+
         public string ImagePath {get; set;}
 
         public bool Active { get; set; }
@@ -70,4 +72,6 @@ namespace Bangazon.Models
         }
 
     }
+
+   
 }
