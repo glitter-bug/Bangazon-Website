@@ -10,47 +10,50 @@
 <div>
     <h4>Order</h4>
     <hr />
-    @if(Model.order != null)
+    @if (Model.order != null)
     {
 
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.order.DateCreated)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.order.DateCreated)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.order.DateCompleted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.order.DateCompleted)
-        </dd>
- 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.order.PaymentType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.order.PaymentType.AccountNumber)
-        </dd>
-        <dt class="col-sm-2">
-            Products
-        </dt>
-        <dd>
-        <table>
-            <tbody>
-                @foreach(var item in Model.order.OrderProducts)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Product.Title)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        </dd>
-    </dl>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.order.DateCreated)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.order.DateCreated)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.order.DateCompleted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.order.DateCompleted)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.order.PaymentType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.order.PaymentType.AccountNumber)
+            </dd>
+            <dt class="col-sm-2">
+                Products
+            </dt>
+            <dd>
+                <table>
+                    <tbody>
+                        @foreach (var item in Model.order.OrderProducts)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Title)
+                                </td>
+                                <td>
+                                    <a class="nav-link @ManageNavPages.ProductReviewNavClass(ViewContext)" id="product-reviews" asp-page="./ProductReviews" asp-route-id="@item.ProductId">Review Product</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
     }
     else
     {

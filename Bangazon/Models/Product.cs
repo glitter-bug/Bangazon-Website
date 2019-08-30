@@ -62,6 +62,8 @@ namespace Bangazon.Models
 
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
 
+        public virtual ICollection<ProductReview> ProductReviews { get; set; }
+
         public Product ()
         {
             Active = true;

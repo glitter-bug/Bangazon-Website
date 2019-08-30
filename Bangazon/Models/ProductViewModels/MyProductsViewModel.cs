@@ -9,5 +9,8 @@ namespace Bangazon.Models.ProductViewModels
     {
         public Product Product { get; set; }
         public int NumberSold { get; set; }
+
+        public double Rating { get; set; }
+
     }
 }

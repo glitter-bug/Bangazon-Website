@@ -1,0 +1,75 @@
+﻿@page
+@model Bangazon.Areas.Identity.Pages.Account.Manage.ProductReviewsModel
+@{
+    ViewData["Title"] = "Product Reviews";
+    ViewData["ActivePage"] = ManageNavPages.ProductReview;
+}
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <div>
+        @if (Model.product.ImagePath != null)
+        {
+            <dl>
+                <dt class="col-lg-2">
+                    @Html.DisplayNameFor(model => model.product.ImagePath)
+                </dt>
+                <dd>
+                    <img width="200" height="200" src="~/@Html.DisplayFor(model => model.product.ImagePath)">
+                </dd>
+            </dl>
+        }
+    </div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.product.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.product.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.product.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.product.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.product.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.product.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.product.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.product.User.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.product.ProductType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.product.ProductType.Label)
+        </dd>
+    </dl>
+</div>
+<form method="post">
+    <div>
+        <div>
+            <label asp-for="@Model.review.Review"></label>
+            <select asp-for="@Model.review.Review">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+</div>
+    </div>
+    
+    <div>
+        <button type="submit">Submit Review</button>
+    </div>
+</form>
+
