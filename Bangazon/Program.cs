@@ -20,5 +20,7 @@ namespace Bangazon
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
+                
     }
 }

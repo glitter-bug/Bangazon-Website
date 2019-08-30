@@ -114,6 +114,7 @@ namespace Bangazon.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(5 * 1024 * 1024)]
         public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,LocalDelivery,City,ImagePath,Active,ProductTypeId")] Product product, IFormFile file)
         {
             var path = Path.Combine(
